@@ -38,8 +38,20 @@ matrix:
         - os: windows
           go: tip
 
+include:
+  - name: lsif index
+    script:
+      - go mod download
+      - go mod verify
+      - lsif-go
+      - src lsif upload
+
 before_install:
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then choco install make; fi
+
+install:
+  - go get github.com/sourcegraph/lsif-go/cmd/lsif-go
+  - go get github.com/sourcegraph/src-cli/cmd/src
 
 script:
   - if [ -z $(go env GOMOD) ]; then
@@ -67,3 +79,4 @@ script:
 branches:
   only:
     - master
+    - upload-lsif
