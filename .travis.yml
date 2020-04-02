@@ -38,13 +38,14 @@ matrix:
         - os: windows
           go: tip
 
-include:
-  - name: lsif index
-    script:
-      - go mod download
-      - go mod verify
-      - lsif-go
-      - src lsif upload
+jobs:
+  include:
+    - name: lsif index
+      script:
+        - go mod download
+        - go mod verify
+        - lsif-go
+        - src lsif upload
 
 before_install:
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then choco install make; fi
