@@ -38,6 +38,8 @@ matrix:
         - os: windows
           go: tip
         - name: lsif index
+          os: linux
+          go: 1.14.x
           script:
             - go mod download
             - go mod verify
